@@ -1,0 +1,106 @@
+Feature Document for NGO Activity Tracker App
+Purpose
+A lightweight mobile app for nonprofit organizations to track field activities, beneficiaries, and supporting documentation, built using React Native (Expo), Redux, Firebase, and Deepseek AI integration.
+
+Core Features
+1. Activity Management
+Add, edit, delete activities
+
+Input: name, date, location (state, city), description, point of contact, contact number
+
+Upload multiple images (activityMedias)
+
+Upload documents (category-tagged: bill, receipt, agenda, etc.)
+
+2. Beneficiary Management
+Add multiple beneficiaries to an activity
+
+Input: full name, gender, caste, DOB, contact info, address (state, district, tehsil), comments
+
+Upload ID documents (Aadhar, PAN, etc.)
+
+Add reference contact for validation
+
+3. Media & Document Handling
+Image and document uploads linked to activities and beneficiaries
+
+Categories and tags for easy filtering
+
+Firebase storage integration
+
+4. Search & Filter
+Filter activities by date, location, or document category
+
+Search beneficiaries by name, caste, document number, etc.
+
+5. Offline Drafts (Optional MVP+)
+Save activity entries locally for submission when online
+
+Tech Stack
+Frontend: React Native (Expo), Redux, TailwindCSS
+
+Database: Firebase Firestore + Storage
+
+AI Integration: Deepseek AI via Cursor editor
+
+Here's the data model
+
+activities: Array of activity
+  - activity: (Object)
+    - activityName: String
+    - activityLocation: Object
+      - state: String
+      - city: String
+    - activityDate: DATE
+    - personOfContact: String
+    - contactNumber: String
+    - activityDescription: String
+    - activityMedias: Array of activityMedia
+      - activityMedia: (Object)
+        - imageName: String
+        - imageURL: String
+    - activityDocuments: Array of activityDocument
+      - activityDocument: (Object)
+        - documentName: String
+        - documentURL: String
+        - documentDescription: String
+        - documentCategory: ENUM
+          - bill
+          - invoice
+          - receipt
+          - cashVoucher
+          - agenda
+          - resolution
+          - others
+    - beneficiaries: Array of beneficiary
+      - beneficiary: (Object)
+         - beneficiaryFirstName: String
+         - beneficiaryMiddleName: String
+         - beneficiaryLastName: String
+         - beneficiaryGender: ENUM
+          - male
+          - female
+         - beneficiaryCaste: ENUM
+          - general
+          - obc
+          - sc
+          - st
+         - beneficiaryDOB: DATE
+         - beneficiaryContactNumber: String
+         - beneficiaryAlternateContactNumber: String
+         - beneficiaryAddress: String
+         - beneficiaryState: String
+         - beneficiaryDistrict: String
+         - beneficiaryTehsil: String
+         - beneficiaryComment: String
+         - beneficiaryDocuments: Array of beneficiaryDocument
+         - beneficiaryDocument: (Object)
+            - beneficiaryDocumentType: ENUM
+               - aadhar
+               - pan
+               - drivingLicense
+               - electionId
+            - beneficiaryDocumentNumber: String
+            - beneficiaryDocumentURL: String
+         - beneficiaryReferencePerson: String
+         - beneficiaryReferencePersonContactNumber: String
